@@ -1,0 +1,634 @@
+/* ==========================================================
+   PORTFOLIO STYLESHEET
+
+   Design system: pixel/voxel aesthetic inspired by Minecraft —
+   dark background, one green accent color, hard square corners
+   (no border-radius anywhere), and "offset shadow" blocks that
+   make cards/buttons look like they're popping off the page.
+
+   Sections in this file, top to bottom:
+   1. CSS variables (design tokens)
+   2. Reset / base defaults
+   3. Typography
+   4. Layout helpers (container, section spacing)
+   5. Navbar
+   6. Hero
+   7. Buttons
+   8. Tags & badges
+   9. Cards
+   10. About / Skills / Projects / Contact / Footer (page sections)
+   11. Responsive breakpoints
+   ========================================================== */
+
+/* ---------- 1. CSS Variables (design tokens) ----------
+   Defining colors/fonts once here means we can reuse var(--green)
+   etc. everywhere below instead of retyping hex codes, and we only
+   have to change a color in ONE place if we want to update the
+   whole site's palette later. */
+:root {
+  --bg: #1a1a1a;          /* page background, near-black */
+  --surface: #2a2a2a;     /* cards, form inputs — slightly lighter than bg */
+  --green: #66bb6a;       /* main accent color: borders, headings, buttons */
+  --green-hi: #88dd8c;    /* brighter green used for hover states */
+  --text: #f0f0f0;        /* main body text color */
+  --muted: #888;          /* secondary/less important text */
+  --border: #66bb6a;      /* same as --green, used for clarity in border rules */
+  --red: #ff4444;         /* form error states only */
+  --orange: #ff9800;      /* warning states (e.g. "coming soon" badge) */
+
+  --font-heading: 'Press Start 2P', monospace; /* blocky pixel font: headings/buttons/labels */
+  --font-body: 'VT323', monospace;             /* taller, more readable pixel font: paragraphs */
+}
+
+/* ---------- 2. Reset ----------
+   Browsers apply their own default margins/paddings differently,
+   so we zero everything out first and add spacing back on purpose
+   later. box-sizing: border-box makes width/height calculations
+   include padding and border, which is much more predictable. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Makes clicking a "#section" nav link glide smoothly to that
+     section instead of jumping there instantly. */
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  /* Two overlapping linear-gradients create a faint 32px x 32px
+     grid pattern across the whole page — a subtle nod to the
+     pixel/voxel aesthetic without being distracting. */
+  background-image:
+    linear-gradient(rgba(102, 187, 106, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102, 187, 106, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.7;
+  /* Flex column + main{flex:1} below is the classic "sticky footer"
+     trick: the footer stays at the bottom of the viewport even on
+     short pages, but gets pushed down naturally on long ones. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+img {
+  max-width: 100%; /* images never overflow their container */
+  display: block;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---------- 3. Typography ---------- */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  line-height: 1.4;
+  color: var(--green);
+}
+
+/* clamp(min, preferred, max) gives "fluid" font sizes: the middle
+   value scales with viewport width, but never shrinks below the
+   min or grows past the max. This avoids needing extra media
+   queries just to resize headings on different screens. */
+h1 { font-size: clamp(20px, 4vw, 36px); }
+h2 {
+  font-size: clamp(16px, 3vw, 24px);
+  margin-bottom: 24px;
+}
+h3 { font-size: clamp(13px, 2vw, 18px); }
+
+p { color: var(--text); }
+
+/* ---------- 4. Layout helpers ---------- */
+
+/* .container centers content and caps its width so text/cards don't
+   stretch edge-to-edge on wide monitors. Every section reuses this. */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Consistent vertical spacing between each page section (About,
+   Skills, Projects, Contact). */
+.section {
+  padding: 64px 0;
+}
+
+/* ---------- 5. Navbar ---------- */
+.navbar {
+  border-bottom: 2px solid var(--green);
+  position: sticky; /* stays pinned to the top while scrolling */
+  top: 0;
+  background: var(--bg);
+  z-index: 100; /* keeps navbar above section content while scrolling */
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo on the left, links on the right */
+  height: 64px;
+  gap: 24px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: clamp(12px, 2vw, 16px);
+  letter-spacing: 2px;
+  color: var(--green);
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent; /* reserves space so hover doesn't shift layout */
+  transition: color 0.1s, border-color 0.1s;
+}
+
+/* .active is toggled by JavaScript's scroll-spy (see script.js) to
+   highlight whichever section is currently in view. */
+.nav-link:hover,
+.nav-link.active {
+  color: var(--green);
+  border-color: var(--green);
+}
+
+/* Hidden by default (desktop shows full nav-links instead); shown
+   only below the 680px breakpoint, see media query at the bottom. */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 2px solid var(--green);
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--green);
+  width: 18px;
+  margin: 0 auto;
+}
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  padding: 96px 0 80px;
+  text-align: center;
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-size: clamp(26px, 5vw, 52px);
+}
+
+.hero-subtitle {
+  max-width: 560px; /* keeps the tagline from stretching too wide to read comfortably */
+  font-size: 22px;
+  color: var(--muted);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap; /* buttons wrap onto a 2nd row on narrow screens instead of overflowing */
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* ---------- 7. Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 14px 22px;
+  background: transparent;
+  border: 2px solid var(--green);
+  color: var(--green);
+  border-radius: 0; /* square corners — a core rule of this design system */
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s, box-shadow 0.1s, transform 0.1s;
+}
+
+/* On hover: fill the button solid green, and add a hard offset
+   shadow (no blur) shifted 4px right/down — this "pixel block"
+   shadow technique is used throughout the site (see cards below
+   too). Shifting the button itself up-left by 1px while the shadow
+   grows makes it feel like the block is lifting off the page. */
+.btn:hover {
+  background: var(--green);
+  color: var(--bg);
+  box-shadow: 4px 4px 0 var(--green-hi);
+  transform: translate(-1px, -1px);
+}
+
+/* On click/press: push the button down-right and remove the shadow,
+   simulating a physical button being pressed in. */
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Filled variant, used for the main call-to-action buttons */
+.btn-primary {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.btn-primary:hover {
+  background: var(--green-hi);
+  border-color: var(--green-hi);
+  color: var(--bg);
+}
+
+.btn-sm {
+  font-size: 9px;
+  padding: 10px 14px;
+}
+
+/* Disabled-looking button style (not currently used on any button,
+   kept available in case a project link needs to show as inactive) */
+.btn-ghost {
+  border-color: var(--muted);
+  color: var(--muted);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- 8. Tags & badges ---------- */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap; /* tags wrap onto multiple lines instead of overflowing */
+  gap: 10px;
+  margin: 12px 0 4px;
+}
+
+/* Small pixel-style pill used for skills and project tech tags */
+.tag {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 8px;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  border: 2px solid var(--green);
+  color: var(--green);
+  background: transparent;
+  border-radius: 0;
+}
+
+/* Status badges shown at the top of each project card */
+.badge-live,
+.badge-soon {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 8px;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  border-radius: 0;
+  margin-bottom: 12px;
+}
+
+.badge-live {
+  background: var(--green);
+  color: var(--bg);
+}
+
+.badge-soon {
+  background: var(--orange);
+  color: var(--bg);
+}
+
+/* ---------- 9. Cards ----------
+   Used for each project in the Projects section. */
+.card {
+  background: var(--surface);
+  border: 2px solid var(--green);
+  /* Hard offset shadow (no blur radius) — the signature "pixel
+     card" look. Same color as the border so it reads as one solid
+     block sitting behind the card. */
+  box-shadow: 4px 4px 0 var(--green);
+  padding: 28px;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+
+/* Same "lift" hover effect as buttons: shadow grows/brightens and
+   the card nudges up-left slightly. */
+.card:hover {
+  box-shadow: 6px 6px 0 var(--green-hi);
+  transform: translate(-1px, -1px);
+}
+
+/* Pushes any card-links row (e.g. "Live Site"/"Code" buttons, if
+   added back later) to the bottom of the card even if descriptions
+   are different lengths, keeping all cards visually aligned. */
+.card-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+/* ---------- About section ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr; /* fixed-width photo column + flexible text column */
+  gap: 32px;
+  align-items: start;
+}
+
+.about-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* keeps the photo perfectly square regardless of the original image's shape */
+  object-fit: cover;   /* crops the photo to fill the square instead of squishing it */
+  border: 2px solid var(--green);
+  box-shadow: 4px 4px 0 var(--green);
+}
+
+.about-text p {
+  margin-bottom: 16px;
+}
+
+.about-facts {
+  margin-top: 8px;
+}
+
+.about-facts li {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.fact-label {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--green);
+  margin-right: 8px;
+}
+
+/* ---------- Skills section ---------- */
+.skills-group {
+  margin-bottom: 32px; /* space between "Languages" / "Tools" / "Other" groups */
+}
+
+.skills-group:last-child {
+  margin-bottom: 0; /* no extra space hanging below the last group */
+}
+
+/* ---------- Projects section ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 equal columns on desktop */
+  gap: 24px;
+  /* Collapses to 1 column on small screens — see media query below */
+}
+
+/* ---------- Contact section ---------- */
+.contact-intro {
+  color: var(--muted);
+  margin-bottom: 32px;
+  max-width: 560px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px; /* form takes remaining space, links column is fixed-width */
+  gap: 32px;
+  align-items: start;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.form-field input,
+.form-field textarea {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text);
+  background: var(--surface);
+  border: 2px solid #444; /* neutral gray by default; turns green on focus below */
+  border-radius: 0;
+  padding: 12px 14px;
+  resize: vertical; /* allow resizing the message box taller, but not wider than its column */
+  transition: border-color 0.15s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+/* Added by JavaScript to a .form-field when that field fails
+   validation on submit (see js/script.js showError()) */
+.form-field.invalid input,
+.form-field.invalid textarea {
+  border-color: var(--red);
+}
+
+.error-msg {
+  font-size: 16px;
+  color: var(--red);
+  min-height: 18px; /* reserves space so the layout doesn't jump when an error appears */
+}
+
+.char-count {
+  font-size: 14px;
+  color: var(--muted);
+  align-self: flex-end;
+}
+
+/* Added by JS once the remaining character count gets low, to warn
+   the user before they hit the 300-character limit */
+.char-count.warning {
+  color: var(--orange);
+}
+
+.form-status {
+  font-size: 16px;
+  color: var(--green);
+  min-height: 20px; /* reserves space so the button doesn't jump when a message appears */
+}
+
+.form-status.error {
+  color: var(--red);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-links .btn {
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 2px solid var(--green);
+  padding: 32px 0;
+}
+
+.footer-inner {
+  display: grid;
+  /* 3 columns: links on the left, copyright centered, "back to top"
+     on the right — "auto" keeps the middle column only as wide as
+     its content needs. */
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  font-size: 9px;
+  font-family: var(--font-heading);
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 9px;
+  font-family: var(--font-heading);
+  color: var(--muted);
+}
+
+.back-to-top {
+  justify-self: end; /* aligns to the right edge of its grid column */
+  font-size: 9px;
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  color: var(--muted);
+  transition: color 0.1s;
+}
+
+.back-to-top:hover {
+  color: var(--green);
+}
+
+/* ==========================================================
+   11. RESPONSIVE BREAKPOINTS
+   Only two breakpoints are needed because most sizing already
+   flexes naturally via clamp() and flex-wrap.
+   ========================================================== */
+
+/* Below 680px: collapse the navbar into a hamburger dropdown menu,
+   stack the About photo above the text, and stack the footer. */
+@media (max-width: 680px) {
+  .nav-links {
+    display: none; /* hidden until JS adds the .open class (see script.js) */
+    position: absolute;
+    top: 64px; /* sits directly below the fixed-height navbar */
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 2px solid var(--green);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 16px 24px;
+    width: 100%;
+    border-bottom: 1px solid #444; /* thin divider between stacked links */
+  }
+
+  .hamburger {
+    display: flex; /* shown only on mobile */
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr; /* stack all 3 footer pieces vertically */
+    text-align: center;
+  }
+
+  .back-to-top {
+    justify-self: center;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr; /* photo above text instead of side-by-side */
+  }
+
+  .about-photo {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr; /* social links move below the form */
+  }
+}
+
+/* Below 700px: drop the 2-column project grid down to 1 column so
+   cards don't get too narrow to read comfortably. */
+@media (max-width: 700px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+}
