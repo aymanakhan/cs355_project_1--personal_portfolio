@@ -32,12 +32,12 @@ A single-page scrolling portfolio for Ayman Khan, a computer science student at 
 9. **Technologies/tools with experience:** Python, C++, Java, HTML, CSS, JavaScript, Git, GitHub, VS Code, Cursor, Claude Code, Codex, Pandas, React, Node.js, Scikit-learn.
 10. **Achievements/experiences worth highlighting:** Built and deployed a personal portfolio and startup website using HTML, CSS, and JavaScript. Founded Dirtcode, a technology-focused community centered on practical, real-world projects. Used Git and GitHub to manage code, document projects, and track development progress. Balanced a double major in Computer Science and Applied Mathematics while developing independent projects.
 11. **Call-to-action for visitors:** View Projects and Contact Me buttons in the hero, a Download Resume button, and a contact form plus GitHub/LinkedIn/Email links in the Contact section. 
-12. **Resume included?** Yes — linked from the "Download Resume" button (`assets/resume.pdf`).
+12. **Resume included?** Yes, linked from the "Download Resume" button (`assets/resume.pdf`).
 13. **Social/professional links:** GitHub (github.com/aymanakhan), LinkedIn (linkedin.com/in/aymanakhan), Email (khan.aymanawsaf@gmail.com).
 
 ## Part 2: Design
 
-1. **Overall style:** A pixel/voxel "blocky" aesthetic — dark background, hard square edges (no rounded corners anywhere), and a single green accent color, inspired by Minecraft-style visual design. Chosen to feel distinctive and technical rather than a generic template look.
+1. **Overall style:** A pixel/voxel "blocky" aesthetic, dark background, hard square edges (no rounded corners anywhere), and a single green accent color, inspired by Minecraft-style visual design. Chosen to feel distinctive and technical rather than a generic template look.
 2. **Color scheme:** Near-black background (`#1a1a1a`) with a green accent (`#66bb6a`) for headings, borders, and buttons; light text (`#f0f0f0`) for readability; a muted gray (`#888`) for secondary text; orange/red reserved only for warnings and form errors. Green ties back to the "Dirtcode" name and its focus on climate/nature-oriented projects. Full palette documented in `css/style.css`.
 3. **Fonts:** "Press Start 2P" (pixel display font) for headings, buttons, and labels; "VT323" (pixel monospace font) for body text and paragraphs, chosen for readability at longer text lengths.
 4. **Personality/field reflection:** The pixel-art aesthetic reflects a hands-on, builder mentality — matching the "tinkerers and problem-solvers" description of Dirtcode and a CS/software background.
@@ -131,7 +131,7 @@ On mobile (≤680px): the nav collapses into a hamburger menu, the About section
 
 - **HTML:** Semantic, single-page structure (`index.html`)
 - **CSS:** Custom stylesheet (`css/style.css`) using CSS variables for the design system, Flexbox and CSS Grid for layout, and `clamp()` for fluid typography — no framework
-- **JavaScript:** Vanilla JS (`js/script.js`), no external libraries — handles navigation, scroll-spy, and form validation
+- **JavaScript:** Vanilla JS (`js/script.js`), no external libraries, handles navigation, scroll-spy, and form validation
 - **Fonts:** Google Fonts ("Press Start 2P", "VT323")
 - **Hosting:** GitHub Pages
 
