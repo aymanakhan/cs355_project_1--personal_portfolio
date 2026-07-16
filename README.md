@@ -152,8 +152,8 @@ On mobile (≤680px): the nav collapses into a hamburger menu, the About section
 ## External Resources Used
 
 - [Google Fonts](https://fonts.google.com/) — "Press Start 2P" and "VT323"
-- `https://www.gazijarin.com/#intro`
-- `https://www.youtube.com/watch?v=G3e-cpL7ofc`
+- [Gazi Jarin](https://www.gazijarin.com/#intro)'s website
+- [HTML & CSS Full Course - Beginner to Pro](https://www.youtube.com/watch?v=G3e-cpL7ofc)
 
 ## Timeline / Project Milestones
 
