@@ -2,7 +2,7 @@
 
 A personal portfolio website built from scratch with HTML, CSS, and vanilla JavaScript, hosted on GitHub Pages. This document is the Web Design Document for the project. It covers the planning questions, wireframe, and technical overview.
 
-**Live site:** https://aymanakhan.github.io/cs355_project_1--personal_portfolio/
+**Live site:** https://aymanakhan.github.io/cs355_project_1--personal_portfolio/<br>
 **Repo:** https://github.com/aymanakhan/cs355_project_1--personal_portfolio
 
 ---
