@@ -2,8 +2,8 @@
 
 A personal portfolio website built from scratch with HTML, CSS, and vanilla JavaScript, hosted on GitHub Pages. This document is the Web Design Document for the project. It covers the planning questions, wireframe, and technical overview.
 
-**Live site:** `<PASTE YOUR GITHUB PAGES URL HERE ONCE DEPLOYED>`
-**Repo:** `<PASTE YOUR GITHUB REPO URL HERE>`
+**Live site:** https://aymanakhan.github.io/cs355_project_1--personal_portfolio/
+**Repo:** https://github.com/aymanakhan/cs355_project_1--personal_portfolio
 
 ---
 
@@ -30,8 +30,8 @@ A single-page scrolling portfolio for Ayman Khan, a computer science student at 
 7. **Pages/sections included:** Home, About, Skills, Projects, Contact (all on one scrolling page).
 8. **Career goal / desired role:** Software developer / founder — growing Dirtcode into a real-world startup while building strong software engineering fundamentals.
 9. **Technologies/tools with experience:** Python, C++, Java, HTML, CSS, JavaScript, Git, GitHub, VS Code, Cursor, Claude Code, Codex, Pandas, React, Node.js, Scikit-learn.
-10. **Achievements/experiences worth highlighting:** `<add anything not already captured — awards, coursework, hackathons, etc.>`
-11. **Call-to-action for visitors:** View Projects and Contact Me buttons in the hero, a Download Resume button, and a contact form plus GitHub/LinkedIn/Email links in the Contact section.
+10. **Achievements/experiences worth highlighting:** Built and deployed a personal portfolio and startup website using HTML, CSS, and JavaScript. Founded Dirtcode, a technology-focused community centered on practical, real-world projects. Used Git and GitHub to manage code, document projects, and track development progress. Balanced a double major in Computer Science and Applied Mathematics while developing independent projects.
+11. **Call-to-action for visitors:** View Projects and Contact Me buttons in the hero, a Download Resume button, and a contact form plus GitHub/LinkedIn/Email links in the Contact section. 
 12. **Resume included?** Yes — linked from the "Download Resume" button (`assets/resume.pdf`).
 13. **Social/professional links:** GitHub (github.com/aymanakhan), LinkedIn (linkedin.com/in/aymanakhan), Email (khan.aymanawsaf@gmail.com).
 
@@ -48,7 +48,7 @@ A single-page scrolling portfolio for Ayman Khan, a computer science student at 
 9. **Consistency across sections:** A shared token system (colors, fonts, spacing, button/card styles) is defined once in `css/style.css` using CSS variables and reused everywhere, so every section looks part of the same system.
 10. **Accessibility considerations:** High-contrast light text on a dark background, visible green focus states on form fields, semantic HTML landmarks (`header`, `main`, `nav`, `footer`), descriptive `alt` text on the profile image, and labels tied to every form input.
 11. **Icons/images/illustrations:** A profile photo in the About section (`assets/profile.jpg`). Icons are intentionally avoided in favor of text-based pixel buttons and tags to keep the aesthetic consistent.
-12. **Inspiration:** Minecraft's visual style, and Gazi Jarin's one scrolling page portfolio website: `https://www.gazijarin.com/#intro`
+12. **Inspiration:** Minecraft's visual style, and [Gazi Jarin](https://www.gazijarin.com/#intro)'s one scrolling page portfolio website.
 
 ## Part 3: Interactivity
 
@@ -165,7 +165,7 @@ On mobile (≤680px): the nav collapses into a hamburger menu, the About section
 | CSS styling | `07/14/2026` | Done |
 | JavaScript interactivity | `07/14/2026` | Done |
 | Content fill-in (real bio, projects, links) | `07/14/2026` | Done |
-| Testing (mobile, links, form) | `07/15/2026` | `<status>` |
-| Deploy to GitHub Pages | `07/15/2026` | `<status>` |
+| Testing (mobile, links, form) | `07/15/2026` | Done |
+| Deploy to GitHub Pages | `07/15/2026` | Done |
 
 ---
