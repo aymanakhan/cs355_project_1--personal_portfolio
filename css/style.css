@@ -393,6 +393,16 @@ p { color: var(--text); }
   margin-bottom: 16px;
 }
 
+.inline-link {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inline-link:hover {
+  color: var(--green-hi);
+}
+
 .about-facts {
   margin-top: 8px;
 }
