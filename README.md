@@ -164,7 +164,7 @@ On mobile (≤680px): the nav collapses into a hamburger menu, the About section
 | HTML structure | `07/14/2026` | Done |
 | CSS styling | `07/14/2026` | Done |
 | JavaScript interactivity | `07/14/2026` | Done |
-| Content fill-in (real bio, projects, links) | `07/14/2026` | Done |
+| Content fill-in (real bio, projects, links) | `07/15/2026` | Done |
 | Testing (mobile, links, form) | `07/15/2026` | Done |
 | Deploy to GitHub Pages | `07/15/2026` | Done |
 
